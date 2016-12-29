@@ -1,4 +1,4 @@
-imulacion Ruleta
+Simulacion Ruleta
 ---
 
 ![alt text](https://qph.ec.quoracdn.net/main-qimg-23b1989e39b7b3b69924d6b161247b69-c?convert_to_webp=true)
