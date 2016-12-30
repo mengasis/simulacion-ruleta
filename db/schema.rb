@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 20161230041940) do
 
   create_table "gamers", force: :cascade do |t|
     t.string   "usuario"
-    t.integer  "saldo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "saldo",      default: 10000
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
 end
