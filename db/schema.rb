@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20161230041940) do
 
-  create_table "gamers", force: :cascade do |t|
+  create_table "gamers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "usuario"
     t.integer  "saldo",      default: 10000
     t.datetime "created_at",                 null: false
