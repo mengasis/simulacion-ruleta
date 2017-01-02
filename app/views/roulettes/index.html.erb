@@ -1,3 +1,28 @@
 <h1>Partidas Jugadas</h1>
 
 <%= button_to 'Administrar Jugadores',  gamers_path,:class => "button", :method => :get %>
+
+<%= button_to 'A girar',  play_path, method: 'get' %>
+
+
+<table>
+    <thead>
+        <tr>
+            <td>Jugador</td>
+            <td>Fecha</td>
+            <td>Apuesta</td>
+            <td>Resultado</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @roulettes.each do |roulette| %>
+        <tr>
+          <td><%= roulette.gamer.usuario%></td>
+          <td><%= roulette.fecha%></td>
+          <td><%= roulette.apuesta%></td>
+          <td><%= roulette.resultado%></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
