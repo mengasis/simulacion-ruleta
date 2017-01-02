@@ -1,26 +1,30 @@
 class RoulettesController < ApplicationController
     def index
-      @roulettes = Roulette.all
+        @roulettes = Roulette.all
     end
 
     def playManual
-      @gamers = Gamer.all
+        @gamers = Gamer.all
 
-      @gamers.each do |gamer|
-        apuesta = apuesta(gamer.saldo, 32)
-        resultado = play(apuesta)
+        @gamers.each do |gamer|
+            apuesta = apuesta(gamer.saldo, 32)
+            gamer.update(saldo: gamer.saldo - apuesta)
 
-        gamer.update(saldo: resultado)
+            resultado = play(apuesta)
+            puts '**Jugador: ' + gamer.inspect
 
-        if(resultado == gamer.saldo)
-          resultado = false
-        else
-          resultado = true
+            # Si lo apostado es igual a lo ganado, entonces perdio
+            if resultado == apuesta
+                Roulette.create(gamer: gamer, fecha: Date.current.to_s, apuesta: apuesta, resultado: 0)
+            else
+                Roulette.create(gamer: gamer, fecha: Date.current.to_s, apuesta: apuesta, resultado: 1)
+
+                gamer.update(saldo: gamer.saldo + resultado)
+            end
+
         end
 
-        Roulette.create(gamer: gamer.id, fecha: Date.current.to_s, apuesta:  apuesta, resultado: resultado)
-      end
-
+        redirect_to action: 'index'
     end
 
     def apuesta(dinero, temperatura)
