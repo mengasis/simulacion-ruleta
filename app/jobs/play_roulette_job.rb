@@ -14,6 +14,7 @@ class PlayRouletteJob < ApplicationJob
         end
     end
 
+    # Retornara el dinero dependiendo si gana o pierde
     def play(apuesta)
         probSeleccion = rand(100)
         probResultado = rand(100)
