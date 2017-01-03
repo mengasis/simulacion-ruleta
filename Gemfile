@@ -53,4 +53,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mysql2', '0.4.5'
 gem 'http', '2.1.0'
 
-gem 'pg', '0.19.0 ruby x64-mingw32 x86-mingw32'
+gem 'pg', '0.19.0'
