@@ -3,6 +3,11 @@ class RoulettesController < ApplicationController
         @roulettes = Roulette.all
     end
 
+    def reset
+      Roulette.delete_all
+      redirect_to action: 'index'
+    end
+
     def playManual
         @gamers = Gamer.all
 
