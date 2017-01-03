@@ -12,20 +12,23 @@
 
 ActiveRecord::Schema.define(version: 20170102040123) do
 
-  create_table "gamers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "gamers", force: :cascade do |t|
     t.string   "usuario"
     t.integer  "saldo",      default: 10000
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
 
-  create_table "roulettes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "roulettes", force: :cascade do |t|
     t.integer  "gamer_id"
     t.date     "fecha"
-    t.float    "apuesta",    limit: 24
+    t.float    "apuesta"
     t.boolean  "resultado"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["gamer_id"], name: "index_roulettes_on_gamer_id", using: :btree
   end
 
