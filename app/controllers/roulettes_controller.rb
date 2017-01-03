@@ -7,7 +7,9 @@ class RoulettesController < ApplicationController
         @gamers = Gamer.all
 
         @gamers.each do |gamer|
-            apuesta = apuesta(gamer.saldo, 32)
+
+            # Evalua las condiciones para la apuesta
+            apuesta = apuesta(gamer.saldo, getTemperatura)
             gamer.update(saldo: gamer.saldo - apuesta)
 
             resultado = play(apuesta)
@@ -21,16 +23,39 @@ class RoulettesController < ApplicationController
 
                 gamer.update(saldo: gamer.saldo + resultado)
             end
-
         end
 
         redirect_to action: 'index'
     end
 
+    # Verifica si la temperatura de los proximos 7 dias es mayor a 32˚C
+    def getTemperatura
+        apikey = 'addcc19d518e0e9e0be78415f09bebb2'
+
+        actual = Date.today
+
+        for day in 0..7
+
+            epoch = actual.to_time.to_i.to_s
+
+            url = 'https://api.darksky.net/forecast/' + apikey + '/-33.4378,-70.6504,' + epoch
+
+            darksky = JSON.parse(HTTP.get(url))
+
+            temperatura = darksky['daily']['data'][0]['temperatureMax']
+            # 32˚C son 89.6 ˚Fahrenheit
+            return true if temperatura > 89.6
+
+            actual += 1
+        end
+
+        false
+    end
+
     def apuesta(dinero, temperatura)
         if dinero <= 1000 && dinero > 0
             dinero
-        elsif temperatura > 32
+        elsif temperatura
             dinero * rand(4..10) / 100
         elsif dinero > 1000
             dinero * rand(8..15) / 100
