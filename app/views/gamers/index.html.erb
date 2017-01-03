@@ -16,9 +16,10 @@
       <tr>
         <td><%= gamer.usuario %></td>
         <td><%= gamer.saldo %></td>
-        <td><%= link_to 'Show', gamer %></td>
-        <td><%= link_to 'Edit', edit_gamer_path(gamer) %></td>
-        <td><%= link_to 'Destroy', gamer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Jugar', gamer %></td>
+        <td><%= link_to 'Ver', gamer %></td>
+        <td><%= link_to 'Editar', edit_gamer_path(gamer) %></td>
+        <td><%= link_to 'Eliminar', gamer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Gamer', new_gamer_path %>
+<%= link_to 'Crear nuevo jugador', new_gamer_path %>
